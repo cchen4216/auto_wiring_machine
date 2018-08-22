@@ -40,7 +40,7 @@ def set_size(win, w=0, h=0, absolute=True, win_ratio=None):
 #                Program Entry 
 ##############################################
 root = tk.Tk() 
-app = MainApp(root)
+app = MainApp(root) 
 # root.mainloop() 
 
 if app.serialPort.openPort():
@@ -48,12 +48,9 @@ if app.serialPort.openPort():
 
 app.gcoder.readFile('./test.gcode') 
 
-# time.sleep(5) 
-# while app.serialPort.status == 'Run':
-#     time.sleep(1)
-for i in range(30):
-    print(app.serialPort.status)
-    time.sleep(2)
+time.sleep(5) 
+while app.serialPort.status == 'Run':
+    time.sleep(1)
 
 app.serialPort.closePort() 
 

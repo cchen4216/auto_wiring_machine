@@ -151,9 +151,9 @@ class SerialPort:
         elif log[0] == '<':
             self.logQueue.put(log) 
             print('MSG:', log) 
-            if log.find('Idle'):
+            if log.find('Idle') >= 0:
                 self.status = 'Idle'
-            if log.find('Run'):
+            if log.find('Run') >= 0:
                 self.status = 'Run'
         elif 'error:' in log or 'ALARM:' in log: 
             self.logQueue.put(log) 
