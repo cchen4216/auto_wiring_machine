@@ -5,7 +5,8 @@ from tkinter import messagebox as mBox
 try:
 	from serial.tools.list_ports import comports
 except:
-	from lib.serial import comports
+    pass 
+	# from lib.serial import comports
 
 from lib.sender import Sender#, NOT_CONNECTED, STATECOLOR, STATECOLORDEF
 
@@ -43,6 +44,7 @@ class ConnectPanel:
     def getSerialPorts(self):
         devices = sorted([x[0] for x in comports()])
         self.portCombo['values'] = devices
+        # print(len(devices),'\n', devices)
         self.portCombo.current(len(devices)-1)
         
     

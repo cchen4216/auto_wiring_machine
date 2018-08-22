@@ -145,14 +145,14 @@ class Sender:
         pass 
     
     #----------------------------------------------------------------------
-	def initRun(self):
-		self._quit   = 0
-		self._pause  = False
-		self._paths  = None
-		self.running = True
-		self.disable()
-		self.emptyQueue()
-		time.sleep(1)
+    def initRun(self):
+        self._quit   = 0
+        self._pause  = False
+        self._paths  = None
+        self.running = True
+        self.disable()
+        self.emptyQueue()
+        time.sleep(1)
 
     #----------------------------------------------------------------------
 	# thread performing I/O on serial line
