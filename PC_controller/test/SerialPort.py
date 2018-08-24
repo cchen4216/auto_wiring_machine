@@ -94,16 +94,18 @@ class SerialPort:
         self.serial = None
 
     #----------------------------------------------------------------------
-    # Put commands, including gcode, in queue for sending
+    # Send to controller a gcode or command
     #----------------------------------------------------------------------
-    def queueCommand(self, cmd):
-        if self.serial:
-            # if tosend is not string (gcode), tuple or other thing
-            # do some preprocessing here
-
-            # Strip comments/spaces/new line and capitalize
-            cmd = re.sub(r"\s|\(.*?\)", '', cmd).upper()
+    def sendGCode(self, cmd):
+        if self.serial and self.status != 'Run':
             cmdQueue.put(toAsc(cmd+'\n'))
+
+    #----------------------------------------------------------------------
+    # Run Home Cycling 
+    #----------------------------------------------------------------------
+    def home(self): 
+        self._alarm = False 
+        self.sendGCode('$H')
 
     #----------------------------------------------------------------------
 	# thread performing I/O on serial line 
@@ -142,7 +144,6 @@ class SerialPort:
                 self.logQueue.put(('MSG_BUFFER', tosend))
                 # print('MSG_BUFFER', tosend)
                 tosend = None 
-
 
 
     def processLog(self, log):
